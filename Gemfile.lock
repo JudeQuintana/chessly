@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/judequintana/pgn.git
-  revision: 2222a358a7d4d4adb6e81bc8b0a7db9d68171f90
+  revision: eda7a61129a0cc616e910fff0f45770afc9592f2
   branch: pgn-annotations
   specs:
     pgn (0.0.6)
