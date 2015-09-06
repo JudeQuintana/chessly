@@ -3,19 +3,19 @@ FactoryGirl.define do
     white "Mikhail Tal"
     black "Bent Larson"
     result "1-0"
-    pgn { "
-          [Event \"Tal - Larsen Candidates Semifinal\"]
-          [Site \"Bled YUG\"]
-          [Date \"1965.08.08\"]
-          [EventDate \"1965.07.23\"]
-          [Round \"10\"]
-          [White \"Mikhail Tal\"]
-          [Black \"Bent Larsen\"]
-          [Result \"1-0\"]
-          [ECO \"B82\"]
-          [WhiteElo \"?\"]
-          [BlackElo \"?\"]
-          [MovePly \"73\"]
+    pgn { '
+          [Event "Tal - Larsen Candidates Semifinal"]
+          [Site "Bled YUG"]
+          [Date "1965.08.08"]
+          [EventDate "1965.07.23"]
+          [Round "10"]
+          [White "Mikhail Tal"]
+          [Black "Bent Larsen"]
+          [Result "1-0"]
+          [ECO "B82"]
+          [WhiteElo "?"]
+          [BlackElo "?"]
+          [MovePly "73"]
 
           1.e4 c5 2.Nf3 Nc6 3.d4 cxd4 4.Nxd4 e6 5.Nc3 d6 6.Be3 Nf6 7.f4
           Be7 8.Qf3 O-O 9.O-O-O Qc7 10.Ndb5 Qb8 11.g4 a6 12.Nd4 Nxd4
@@ -30,6 +30,6 @@ FactoryGirl.define do
           keeps his two extra pawns. The finish is straightforward. --
           Damsky} Rf8 30.Qe4 b3 31.axb3 Rf1+ 32.Kd2 Qb4+ 33.c3 Qd6
           34.Bc5 Qxc5 35.Re8+ Rf8 36.Qe6+ Kh8 37.Qf7 1-0
-          " }
+          ' }
   end
 end
