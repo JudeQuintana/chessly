@@ -12,7 +12,7 @@ class FenList
   end
 
   def generate!
-    pgn = PGN.parse(game.pgn).first
+    pgn = pgn_parser.parse(game.pgn).first
 
     positions = pgn.positions[1..-1]
 

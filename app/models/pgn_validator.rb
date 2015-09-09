@@ -6,9 +6,9 @@ class PgnValidator
   validates :pgn_text, :presence => true
   validate :check_pgn
 
-  def initialize(attributes, pgn_parser = PGN)
+  def initialize(attrs, pgn_parser = PGN)
     self.pgn_parser = pgn_parser
-    super(attributes)
+    super(attrs)
   end
 
 
@@ -26,7 +26,6 @@ class PgnValidator
   end
 
   def clean!
-    pgn_text.strip!
     pgn_text.gsub!(/[\u201c|\u201d]/, "\"") #top 2 remove unicode quotation marks
     pgn_text.gsub!(/\$\d+\s/, "") #removes NAG
   end
