@@ -26,7 +26,7 @@ class PgnValidator
   end
 
   def clean!
-    pgn_text.gsub!(/[\u201c|\u201d]/, "\"") #top 2 remove unicode quotation marks
+    pgn_text.gsub!(/[\u201c|\u201d]/, "\"") #replace unicode quotation marks
     pgn_text.gsub!(/\$\d+\s/, "") #removes NAG
   end
 end
