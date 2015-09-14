@@ -4,7 +4,7 @@ RSpec.describe PgnValidator do
   describe "parsing" do
     context "invalid PGN" do
       it "generates errors" do
-        pgn_parser = PgnValidator.new(:pgn_text => invalid_pgn)
+        pgn_parser = PgnValidator.new(:text => invalid_pgn)
 
         expect(pgn_parser.valid?).to eq(false)
         expect(pgn_parser.errors).to include(:pgn)
@@ -13,14 +13,14 @@ RSpec.describe PgnValidator do
 
     context "valid PGN" do
       it "returns true and doesnt have errors" do
-        pgn_parser = PgnValidator.new(:pgn_text => valid_pgn)
+        pgn_parser = PgnValidator.new(:text => valid_pgn)
 
         expect(pgn_parser.valid?).to eq(true)
         expect(pgn_parser.errors.any?).to eq(false)
       end
 
       it "returns the game object" do
-        pgn_parser = PgnValidator.new(:pgn_text => valid_pgn)
+        pgn_parser = PgnValidator.new(:text => valid_pgn)
 
         expect(pgn_parser.game).to eq(nil)
 

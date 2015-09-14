@@ -1,9 +1,9 @@
 class PgnValidator
   include ActiveModel::Model
 
-  attr_accessor :pgn_text, :game
+  attr_accessor :text, :game
 
-  validates :pgn_text, :presence => true
+  validates :text, :presence => true
   validate :check_pgn
 
   def initialize(attrs, pgn_parser = PGN)
@@ -19,14 +19,16 @@ class PgnValidator
   def check_pgn
     begin
       clean!
-      self.game = pgn_parser.parse(pgn_text).first
+      self.game = pgn_parser.parse(text).first
     rescue
       errors.add(:pgn, "could not be parsed, please check your formatting.")
     end
   end
 
   def clean!
-    pgn_text.gsub!(/[\u201c|\u201d]/, "\"") #replace unicode quotation marks
-    pgn_text.gsub!(/\$\d+\s/, "") #removes NAG
+    text.gsub!(/[\u201c|\u201d]/, "\"") #replace unicode quotation marks
+    text.gsub!(/\$\d+\s/, "") #removes NAG
+    text.gsub!(/\r/, "")#remove carriage return
+    text.gsub!(/\n/, " ")#replace new line with space
   end
 end
