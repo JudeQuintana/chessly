@@ -3,9 +3,9 @@
     <div class="col-lg-4"></div>
 
     <div class="col-lg-4">
-      <% if @game.errors.any? %>
+      <% if @pgn.errors.any? %>
         <div class="alert alert-danger" role="alert">
-          <% @game.errors.full_messages.each do |err| %>
+          <% @pgn.errors.full_messages.each do |err| %>
             <p><%= err %></p>
           <% end %>
         </div>
@@ -19,10 +19,10 @@
     <div class="col-lg-4"></div>
 
     <div class="col-lg-4">
-      <%= form_tag(games_path, :method => :post, :class => "form hid") do %>
+      <%= form_for @pgn, :url => pgn_path, :class => "form hid" do |f| %>
         <div class="form-group">
-          <%= label_tag(:text, "Copy/Paste PGN") %> <%= link_to "Example", "#", :id => "example" %>
-          <%= text_area_tag(:text, "", :size => "24x20", :class => "form-control") %>
+          <%= f.label(:text, "Copy/Paste PGN") %> <%= link_to "Example", "#", :id => "example" %>
+          <%= f.text_area(:text, :size => "24x20", :class => "form-control") %>
         </div>
         <%= submit_tag("Submit", :class => "btn") %>
       <% end %>

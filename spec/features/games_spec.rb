@@ -107,7 +107,7 @@ RSpec.describe "Games" do
         visit root_path
         click_on "Create Game"
 
-        fill_in :text, :with => valid_pgn
+        fill_in :pgn_text, :with => valid_pgn
         click_on "Submit"
 
         expect(page).to have_content("Mikhail Tal")
@@ -121,7 +121,7 @@ RSpec.describe "Games" do
         click_on "Submit"
         expect(page).to have_content("Text can't be blank")
 
-        fill_in :text, :with => "blah"
+        fill_in :pgn_text, :with => "blah"
         click_on "Submit"
         expect(page).to have_content("Pgn could not be parsed, please check your formatting.")
       end

@@ -4,25 +4,6 @@ class GamesController < ApplicationController
     @games = Game.all
   end
 
-  def new
-    @game = Game.new
-  end
-
-  def create
-    pgn = ::Utils::Pgn.new(pgn_params)
-
-    if pgn.valid?
-      game = pgn.game
-
-      game.save!
-
-      redirect_to root_path
-    else
-      @game = pgn
-      render :new
-    end
-  end
-
   def show
   end
 
@@ -35,11 +16,7 @@ class GamesController < ApplicationController
 
   private
 
-  def default_params
-    { :text => "" }
-  end
-
-  def pgn_params
-    params.permit(:text)
+  def game_params
+    params.permit(:game_params)
   end
 end

@@ -72,30 +72,31 @@ module Utils
 
           expect(pgn.valid?).to eq(false)
           expect(pgn.errors).to include(:pgn)
-          expect(pgn.game).to eq(nil)
+          expect(pgn.game_params).to eq(nil)
         end
       end
 
       context "valid PGN" do
         it "returns true and doesnt have errors" do
-          pgn = Pgn.new(:text   => valid_pgn)
+          pgn = Pgn.new(:text => valid_pgn)
 
           expect(pgn.valid?).to eq(true)
           expect(pgn.errors.any?).to eq(false)
         end
 
-        it "returns the game object" do
+        it "returns the game_params hash" do
+          valid_params = { :white  => "Mikhail Tal",
+                           :black  => "Bent Larsen",
+                           :result => "1-0",
+                           :pgn    => valid_pgn }
+
           pgn = Pgn.new(:text => valid_pgn)
 
-          expect(pgn.game).to eq(nil)
+          expect(pgn.game_params).to eq(nil)
 
           pgn.valid?
 
-          expect(game = pgn.game).to be
-
-          expect(game.white).to eq("Mikhail Tal")
-          expect(game.black).to eq("Bent Larsen")
-          expect(game.result).to eq("1-0")
+          expect(pgn.game_params).to eq(valid_params)
         end
       end
     end
