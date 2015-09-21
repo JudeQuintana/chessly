@@ -9,11 +9,12 @@ class GamesController < ApplicationController
   end
 
   def create
-    pgn = PgnValidator.new(pgn_params)
+    pgn = ::Utils::Pgn.new(pgn_params)
 
     if pgn.valid?
       game = pgn.game
-      Game.create!(game_params(game))
+
+      game.save!
 
       redirect_to root_path
     else
@@ -41,13 +42,4 @@ class GamesController < ApplicationController
   def pgn_params
     params.permit(:text)
   end
-
-  def game_params(game)
-    tags = game.tags
-    { :white  => tags.fetch("White"),
-      :black  => tags.fetch("Black"),
-      :result => tags.fetch("Result"),
-      :pgn    => pgn_params }
-  end
-
 end
