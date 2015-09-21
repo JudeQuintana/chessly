@@ -7,5 +7,4 @@ Rails.application.routes.draw do
   end
 
   resource :pgn, :only => [:new, :create]
-
 end

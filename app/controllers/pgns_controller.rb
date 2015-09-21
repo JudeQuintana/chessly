@@ -7,12 +7,8 @@ class PgnsController < ApplicationController
   def create
     @pgn = Pgn.new(pgn_params)
 
-    if @pgn.valid?
-      game_params = @pgn.game_params
-
-      Game.create(game_params)
-
-      redirect_to root_path
+    if @pgn.save
+      redirect_to root_path, :notice => "Game Saved!"
     else
       render :new
     end
