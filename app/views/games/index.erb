@@ -1,53 +1,52 @@
 <div class="container-fluid">
-    <div class="panel panel-default hid">
-      <!-- Default panel contents -->
-      <div class="panel-heading"><h3><%= "Game List" %></h3>
+  <div class="panel panel-default hid">
+    <!-- Default panel contents -->
+    <div class="panel-heading"><h3><%= "Game List" %></h3>
 
-        <div class="filter">
-          <input type="text" id="search-input" class="form-control" placeholder="Filter"/>
-        </div>
+      <div class="filter">
+        <input type="text" id="search-input" class="form-control" placeholder="Filter"/>
       </div>
-      <table class="table table-hover">
-        <thead>
-        <tr>
-          <th></th>
-          <th>#</th>
-          <th></th>
-          <th>White</th>
-          <th>Black</th>
-          <th>Result</th>
-          <th></th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <% if @games.length > 0 %>
-          <% @games.each_with_index do |game, index| %>
-            <tr>
-              <td></td>
-              <td><%= index + 1 %></td>
-              <td><%= link_to "Play", game_path(game) %> </td>
-              <td><%= link_to game_path(game) do %>
-                  <%= content_tag(:span, "", class: "glyphicon glyphicon-play-circle") %>
-                <% end %>
-              </td>
-              <td><%= game[:white] %></td>
-              <td><%= game[:black] %></td>
-              <td><%= game[:result] %></td>
-              <td>
-                <%= button_to game_path(game), method: :delete, class: "btn remove-game" do %>
-                  <%= content_tag(:span, "", class: "glyphicon glyphicon-remove") %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        <% else %>
-          <h3 style="text-align: center">No games, try creating one!</h3>
-        <% end %>
-        </tbody>
-      </table>
     </div>
-  </div>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th></th>
+        <th>#</th>
+        <th></th>
+        <th>White</th>
+        <th>Black</th>
+        <th>Result</th>
+        <th></th>
+      </tr>
+      </thead>
 
-  <div class="col-lg-2"></div>
+      <tbody>
+      <% if @games.length > 0 %>
+        <% @games.each_with_index do |game, index| %>
+          <tr>
+            <td></td>
+            <td><%= index + 1 %></td>
+            <td><%= link_to game_path(game) do %>
+                <span class="glyphicon glyphicon-play-circle"></span>
+              <% end %>
+            </td>
+            <td><%= game[:white] %></td>
+            <td><%= game[:black] %></td>
+            <td><%= game[:result] %></td>
+            <td>
+              <%= button_to game_path(game), method: :delete, class: "btn remove-game" do %>
+                <span class="glyphicon glyphicon-remove"></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <h3 class="text-center">No games, try creating one!</h3>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="col-lg-2"></div>
 </div>
