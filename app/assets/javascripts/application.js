@@ -12,6 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require chessboard-0.3.0
 //= require chess
+//= require fx
+//= require example
 //= require_tree .

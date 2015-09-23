@@ -25,7 +25,6 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem "react-rails"
-gem "simple_form"
 gem "faker"
 gem 'pgn', :github => 'judequintana/pgn', :branch => 'pgn-annotations'
 # Use ActiveModel has_secure_password

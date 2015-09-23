@@ -14,3 +14,7 @@
  *= require_tree .
  *= require_self
  */
+
+.ui-hidden {
+  display: none;
+}
