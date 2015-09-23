@@ -67,9 +67,9 @@ module Utils
 
     let!(:valid_pgn_no_white_black_result) {
       temp_pgn = valid_pgn.dup
-      temp_pgn.gsub!("[White \"Mikhail Tal\"]", "\n")
-      temp_pgn.gsub!("[Black \"Bent Larsen\"]", "\n")
-      temp_pgn.gsub!("[Result \"1-0\"]", "\n")
+      temp_pgn.gsub!("[White \"Mikhail Tal\"]", "")
+      temp_pgn.gsub!("[Black \"Bent Larsen\"]", "")
+      temp_pgn.gsub!("[Result \"1-0\"]", "")
       temp_pgn
     }
 
@@ -99,20 +99,15 @@ module Utils
         end
 
         it "saves game with valid pgn" do
-          valid_game_params = { :white  => "Mikhail Tal",
-                                :black  => "Bent Larsen",
-                                :result => "1-0",
-                                :pgn    => valid_pgn }
-
           pgn = Pgn.new(:text => valid_pgn)
 
           expect(pgn.save).to eq(true)
 
           game = Game.last
-          expect(game.white).to eq(valid_game_params[:white])
-          expect(game.black).to eq(valid_game_params[:black])
-          expect(game.result).to eq(valid_game_params[:result])
-          expect(game.pgn).to eq(valid_game_params[:pgn])
+          expect(game.white).to eq("Mikhail Tal")
+          expect(game.black).to eq("Bent Larsen")
+          expect(game.result).to eq("1-0")
+          expect(game.pgn).to eq(valid_pgn)
         end
 
         it "generates errors for valid pgn but no white, black, or result fields exist" do
