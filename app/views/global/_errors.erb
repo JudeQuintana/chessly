@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-lg-4"></div>
+
+  <div class="col-lg-4">
+    <% if errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <% errors.full_messages.each do |err| %>
+          <p><%= err %></p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-lg-4"></div>
+</div>

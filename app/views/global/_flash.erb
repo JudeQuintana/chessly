@@ -1,0 +1,9 @@
+<div class="row container-fluid">
+  <div class="col-lg-12">
+    <% if flash.any? %>
+      <div class="alert alert-success text_center" role="alert">
+        <p><%= flash[:notice] %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
