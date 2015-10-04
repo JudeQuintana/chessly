@@ -1,28 +1,71 @@
-var PgnViewer = function(pgn){
+var PgnViewer = function(pgn) {
 
-  var game = new Chess();
+  var game, cfg, board, gameHistory, nextMove, lastMove;
+  var moveIndex = 0;
 
-  pgn_loaded = game.load_pgn(pgn);
+  initGame();
+  loadPGN();
+  setupButtons();
 
-  console.log("Pgn loaded?: " + pgn_loaded);
+  function initGame() {
+    game = new Chess();
 
-  var cfg = {
-    position: 'start',
-    pieceTheme: "/assets/chesspieces/wikipedia/{piece}.png"
-  };
+    cfg = {
+      position: 'start',
+      pieceTheme: "/assets/chesspieces/wikipedia/{piece}.png"
+    };
 
-  var board = ChessBoard('board', cfg);
+    board = ChessBoard('board', cfg);
+  }
 
-  $('#startPositionBtn').on('click', board.start);
+  function loadPGN() {
+    var pgn_loaded = game.load_pgn(pgn);
 
-  $('#back').on('click', function() {
-    board.move('e2-e4');
-    console.log("back");
-  });
+    gameHistory = game.history({verbose: true});
+    console.log("Pgn loaded?: " + pgn_loaded);
 
-  $('#forward').on('click', function() {
-    console.log("foward");
+    setNextMove();
+    //console.log(gameHistory);
+  }
 
-    board.move('d2-d4', 'g8-f6');
-  });
+  function setupButtons() {
+
+    $('#startBtn').on('click', function(){
+      board.start();
+      resetGameHistory();
+      setNextMove();
+    });
+
+    $('#backBtn').on('click', function() {
+      console.log("lastMove: " + lastMove);
+      board.move(lastMove);
+    });
+
+    $('#fwdBtn').on('click', function() {
+      console.log("nextMove: " + nextMove);
+
+      board.move(nextMove);
+
+      setNextMove();
+      setLastMove();
+    });
+  }
+
+  function setNextMove() {
+    var move_from = gameHistory[moveIndex]["from"];
+    var move_to = gameHistory[moveIndex]["to"];
+
+    nextMove = move_from + "-" + move_to;
+    moveIndex++;
+  }
+
+  function setLastMove()
+  {
+
+  }
+
+  function resetGameHistory(){
+    gameHistory = game.history({verbose: true});
+    moveIndex = 0;
+  }
 };
