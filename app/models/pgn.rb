@@ -42,6 +42,7 @@ class Pgn
     text.gsub!(/[\u201c|\u201d]/, "\"") #replace unicode quotation marks
     text.gsub!(/\$\d+\s/, "") #removes NAG
     text.gsub!(/\n\s/, " ") #replace new line with space
+    text.gsub!(/;/, "") #remove semi-colon
   end
 
   def build_game_params!

@@ -1,4 +1,11 @@
-var PgnViewer = function(){
+var PgnViewer = function(pgn){
+
+  var game = new Chess();
+
+  pgn_loaded = game.load_pgn(pgn);
+
+  console.log("Pgn loaded?: " + pgn_loaded);
+
   var cfg = {
     position: 'start',
     pieceTheme: "/assets/chesspieces/wikipedia/{piece}.png"
