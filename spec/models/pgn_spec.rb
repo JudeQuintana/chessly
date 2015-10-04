@@ -126,7 +126,6 @@ module Utils
 
           expect(pgn.valid?).to eq(false)
           expect(pgn.save).to eq(false)
-
           expect(pgn.errors).to include(:white, :black, :result)
         end
       end
