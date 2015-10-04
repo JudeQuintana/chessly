@@ -13,11 +13,4 @@ class GamesController < ApplicationController
     game.destroy
     redirect_to root_path, :notice => "Game Deleted!"
   end
-
-
-  private
-
-  def game_params
-    params.permit(:game_params)
-  end
 end

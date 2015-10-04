@@ -23,7 +23,7 @@ class Pgn
   attr_accessor :parser, :game_params, :pgn_game
 
   def check_format!
-    return if !text.present?
+    return if text.blank?
 
     begin
       clean!
@@ -38,7 +38,7 @@ class Pgn
   end
 
   def clean!
-    text.strip! #remove carriage return
+    text.strip! #remove white space from ends of string
     text.gsub!(/[\u201c|\u201d]/, "\"") #replace unicode quotation marks
     text.gsub!(/\$\d+\s/, "") #removes NAG
     text.gsub!(/\n\s/, " ") #replace new line with space
