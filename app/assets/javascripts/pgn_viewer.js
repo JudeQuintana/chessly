@@ -1,6 +1,6 @@
 var PgnViewer = function(pgn) {
 
-  var game, cfg, board, gameHistory, nextMove, lastMove;
+  var game, cfg, board, gameHistory;
   var moveIndex = 0;
 
   initGame();
@@ -20,51 +20,52 @@ var PgnViewer = function(pgn) {
 
   function loadPGN() {
     var pgn_loaded = game.load_pgn(pgn);
-
     gameHistory = game.history({verbose: true});
     console.log("Pgn loaded?: " + pgn_loaded);
-
-    setNextMove();
-    //console.log(gameHistory);
   }
 
   function setupButtons() {
-
-    $('#startBtn').on('click', function(){
+    $('#startBtn').on('click', function() {
       board.start();
       resetGameHistory();
-      setNextMove();
     });
 
     $('#backBtn').on('click', function() {
-      console.log("lastMove: " + lastMove);
-      board.move(lastMove);
+      if (!outOfBounds(moveIndex - 1)) {
+        moveIndex--;
+        board.move(getMove("back"));
+      }
     });
 
     $('#fwdBtn').on('click', function() {
-      console.log("nextMove: " + nextMove);
-
-      board.move(nextMove);
-
-      setNextMove();
-      setLastMove();
+      if (!outOfBounds(moveIndex + 1)) {
+        board.move(getMove("forward"));
+        moveIndex++;
+      }
     });
   }
 
-  function setNextMove() {
-    var move_from = gameHistory[moveIndex]["from"];
-    var move_to = gameHistory[moveIndex]["to"];
-
-    nextMove = move_from + "-" + move_to;
-    moveIndex++;
+  function outOfBounds(index) {
+    return typeof gameHistory[index] === "undefined";
   }
 
-  function setLastMove()
-  {
+  function getMove(str) {
+    var move_from, move_to, move;
 
+    if (str === "back") {
+      move_from = gameHistory[moveIndex]["to"];
+      move_to = gameHistory[moveIndex]["from"];
+    } else if (str === "forward") {
+      move_from = gameHistory[moveIndex]["from"];
+      move_to = gameHistory[moveIndex]["to"];
+    }
+
+    move = move_from + "-" + move_to;
+
+    return move;
   }
 
-  function resetGameHistory(){
+  function resetGameHistory() {
     gameHistory = game.history({verbose: true});
     moveIndex = 0;
   }

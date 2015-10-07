@@ -41,7 +41,6 @@ class Pgn
     text.strip! #remove white space from ends of string
     text.gsub!(/[\u201c|\u201d]/, "\"") #replace unicode quotation marks
     text.gsub!(/\$\d+\s/, "") #removes NAG
-    text.gsub!(/\n\s/, " ") #replace new line with space
     text.gsub!(/;/, "") #remove semi-colon
   end
 
@@ -49,13 +48,17 @@ class Pgn
     self.game_params = { :white  => pgn_game.tags["White"],
                          :black  => pgn_game.tags["Black"],
                          :result => pgn_game.tags["Result"],
-                         :pgn    => text }
+    }
   end
 
   def check_game_params!
     game = new_game(game_params)
     if !game.valid?
       add_errors_from_game(game)
+    else
+      text.gsub!(/\r/, "") #removes carriage return
+      text.gsub!(/\n/, " ") #replace new line with space
+      self.game_params = game_params.merge(:pgn => text)
     end
   end
 
