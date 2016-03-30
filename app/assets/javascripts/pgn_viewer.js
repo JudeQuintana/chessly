@@ -1,11 +1,8 @@
 var PgnViewer = function(pgn) {
 
-  var game, cfg, board, gameHistory;
-  var moveIndex = 0;
+  var game, cfg, board, gameHistory, moveIndex;
 
   initGame();
-  loadPGN();
-  setupButtons();
 
   function initGame() {
     game = new Chess();
@@ -16,11 +13,15 @@ var PgnViewer = function(pgn) {
     };
 
     board = ChessBoard('board', cfg);
+
+    loadPGN();
+    setupButtons();
   }
 
   function loadPGN() {
     var pgn_loaded = game.load_pgn(pgn);
     gameHistory = game.history({verbose: true});
+    moveIndex = 0;
     console.log("Pgn loaded?: " + pgn_loaded);
   }
 
@@ -62,11 +63,11 @@ var PgnViewer = function(pgn) {
 
     move = move_from + "-" + move_to;
 
+    console.log("Move: " + move);
     return move;
   }
 
   function resetGameHistory() {
-    gameHistory = game.history({verbose: true});
-    moveIndex = 0;
+    loadPGN();
   }
 };
