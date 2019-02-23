@@ -80,3 +80,4 @@ var buildBoard = function() {
 
   updateStatus();
 };
+

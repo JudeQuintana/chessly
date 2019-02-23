@@ -1,6 +1,6 @@
-var PgnViewer = function(pgn) {
+var PgnViewer = function(pgn, fens_endpoint) {
 
-  var game, cfg, board, gameHistory, moveIndex;
+  var game, cfg, board, gameHistory, moveIndex, fenIndex, fens;
 
   initGame();
 
@@ -22,7 +22,14 @@ var PgnViewer = function(pgn) {
     var pgn_loaded = game.load_pgn(pgn);
     gameHistory = game.history({verbose: true});
     moveIndex = 0;
+    fenIndex = 0;
     console.log("Pgn loaded?: " + pgn_loaded);
+    console.log("Pgn: " + pgn);
+    $.getJSON(fens_endpoint, function(data){
+      fens = data
+    });
+    //$('#fen')
+    $('#fen').append(document.createTextNode(""));
   }
 
   function setupButtons() {
@@ -42,12 +49,25 @@ var PgnViewer = function(pgn) {
       if (!outOfBounds(moveIndex + 1)) {
         board.move(getMove("forward"));
         moveIndex++;
+        fenIndex++;
+        console.log("Fen: " + fens[fenIndex]);
+        $('#fen').contents().last()[0].textContent=getFen(moveIndex);
       }
     });
   }
 
   function outOfBounds(index) {
     return typeof gameHistory[index] === "undefined";
+  }
+
+  function getFen(moveIndex){
+
+    if (moveIndex % 2 == 1){
+          return fens[moveIndex][0];
+    } else {
+      return fens[moveIndex][1]
+    }
+
   }
 
   function getMove(str) {

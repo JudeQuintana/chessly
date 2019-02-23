@@ -11,6 +11,7 @@ class FenList
     self.list       = {}
   end
 
+  # generates fens for each move in the PGN
   def generate!
     pgn = pgn_parser.parse(game.pgn).first
 

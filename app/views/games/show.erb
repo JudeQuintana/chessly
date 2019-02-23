@@ -14,11 +14,8 @@
       <button class="btn btn-primary" id="fwdBtn">
         <span class="glyphicon glyphicon-chevron-right"></span>
       </button>
-      <p>Status: <span id="status"></span></p>
 
       <p>FEN: <span id="fen"></span></p>
-
-      <p>PGN: <span id="pgn"></span></p>
 
 
     </div>
@@ -27,5 +24,7 @@
 </div>
 <script type="text/javascript" charset="utf-8">
   var pgn = "<%= @game.moves %>";
-  PgnViewer(pgn);
+
+  var pgnViewer = PgnViewer(pgn, "<%= game_fen_path(@game) %>");
 </script>
+
