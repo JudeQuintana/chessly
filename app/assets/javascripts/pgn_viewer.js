@@ -28,7 +28,6 @@ var PgnViewer = function(pgn, fens_endpoint) {
     $.getJSON(fens_endpoint, function(data){
       fens = data
     });
-    //$('#fen')
     $('#fen').append(document.createTextNode(""));
   }
 
@@ -50,7 +49,9 @@ var PgnViewer = function(pgn, fens_endpoint) {
         board.move(getMove("forward"));
         moveIndex++;
         fenIndex++;
-        console.log("Fen: " + fens[fenIndex]);
+
+        console.log("Fen: " + getFen(moveIndex));
+
         $('#fen').contents().last()[0].textContent=getFen(moveIndex);
       }
     });
@@ -61,13 +62,7 @@ var PgnViewer = function(pgn, fens_endpoint) {
   }
 
   function getFen(moveIndex){
-
-    if (moveIndex % 2 == 1){
-          return fens[moveIndex][0];
-    } else {
-      return fens[moveIndex][1]
-    }
-
+    return fens[moveIndex-1];
   }
 
   function getMove(str) {
